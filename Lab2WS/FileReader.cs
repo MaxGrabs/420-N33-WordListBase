@@ -7,17 +7,21 @@ namespace Lab2WS
     {
         public string[] Read(string filename) 
         {
-           // try {
             // Implement this using info from the slides.
-            //return array of strings-----delete null obviously
-            string [] content  = File.ReadAllLines(@filename);
+            //checks if file exists, reads file and returns array of each word if not returns null
+            if (File.Exists(filename))
+            {
+
+            string[] content  = File.ReadAllLines(@filename);
             
-          //  }
-           // catch(FileNotFoundException e)
-            //{
-               //Console.WriteLine(e.Message);
+           
                 return content;
-           // }
+
+            }
+            else
+            {
+                return null;
+            }
 
         }
     }
