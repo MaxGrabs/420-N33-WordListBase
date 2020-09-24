@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Lab2WS
 {
@@ -56,7 +57,9 @@ namespace Lab2WS
         private static void ExecuteScrambledWordsManualEntryScenario()
         {
             // 1 get the user's input - comma separated string containing scrambled words
+                
             // 2 Extract the words into a string (red,blue,green) 
+
             // 3 Call the DisplayMatchedUnscrambledWords method passing the scrambled words string array
 
         }
@@ -69,10 +72,22 @@ namespace Lab2WS
 
 
             // Rule:  Use a formatter to display ... eg:  {0}{1}
-
+            if (!matchedWords.Any())
+            {
+               Console.WriteLine("no words found")
+            }
+            else
+            {
+                foreach (MatchedWord s in matchedWords)
+                {
+                    String display = String.Format("MATCH FOUND FOR{0}{1}", scrambledWords, wordList);
+                }
+                
+            }
             // Rule:  USe an IF to determine if matchedWords is empty or not......
             //            if empty - display no words found message.
             //            if NOT empty - Display the matches.... use "foreach" with the list (matchedWords)
+
         }
     }
 }
