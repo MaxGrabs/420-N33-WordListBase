@@ -32,7 +32,9 @@ namespace Lab2WS
                 }
 
                 // Optional for now (when you have no loop)  (Take out when finished)
-                Console.ReadKey();
+                Console.WriteLine("Sorry");
+
+        Console.ReadKey();
 
             }
             catch (Exception e)
