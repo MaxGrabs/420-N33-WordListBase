@@ -11,37 +11,63 @@ namespace Lab2WS
 
         static void Main(string[] args)
         {
-            try
+            bool success = false;
+            bool success2 = false;
+            while (success == false)
             {
-                Console.WriteLine("Enter the scrambled words manually or as a file: f - file, m = manual");
-
-                string option = Console.ReadLine() ?? throw new Exception("String is null");
-
-                switch (option.ToUpper())
+                try
                 {
-                    case "F":
-                        Console.WriteLine("Enter the full path and filename >");
-                        ExecuteScrambledWordsInFileScenario();
-                        break;
-                    case "M":
-                        Console.WriteLine("Enter word(s) separated by a comma");
-                        ExecuteScrambledWordsManualEntryScenario();
-                        break;
-                    default:
-                        Console.WriteLine("The entered option was not recognized");
-                        break;
+                    Console.WriteLine(Constants.WordOption);
+
+                    string option = Console.ReadLine() ?? throw new Exception(Constants.StringNull);
+
+                    switch (option.ToUpper())
+                    {
+                        case Constants.File:
+                            Console.WriteLine(Constants.FilePath);
+                            ExecuteScrambledWordsInFileScenario();
+                           // Console.WriteLine("Test1"); Error appears so wont get to this line and thus success remains false.
+                            success = true;
+                            break;
+                        case Constants.Manual:
+                            Console.WriteLine(Constants.ManualPath);
+                            ExecuteScrambledWordsManualEntryScenario();
+                            success = true;
+                            break;
+                        default:
+                            Console.WriteLine(Constants.FileManualError);
+                            break;
+                    }
+                    if (success == true)
+                    {
+                        Console.WriteLine(Constants.ContinueQuestion);
+
+                        while (success2 == false)
+                        {
+                            string optionAgain = Console.ReadLine() ?? throw new Exception(Constants.StringNull);
+
+                            switch (optionAgain.ToUpper())
+                            {
+                                case Constants.Yes:
+                                    success = false;
+                                    success2 = true;
+                                    break;
+                                case Constants.No:
+                                    success2 = true;
+                                    break;
+                                default:
+                                    Console.WriteLine(Constants.FileManualError);
+                                    break;
+                            }
+                        }
+                    }
+
                 }
-
-                // Optional for now (when you have no loop)  (Take out when finished)
-               // Console.WriteLine("Sorry");
-                //Console.ReadKey();
-
+                catch (Exception e)
+                {
+                    Console.WriteLine(Constants.ErrorMessage + e.Message);
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine("Sorry an error has occurred.. " + e.Message);
-            }
-            
 
 
         }
@@ -59,45 +85,46 @@ namespace Lab2WS
 
         private static void ExecuteScrambledWordsManualEntryScenario()
         {
+
+            string userInput = Console.ReadLine();
+            string[] scrambledWords = userInput.Split(',');
+            DisplayMatchedScrambledWords(scrambledWords);
+
             // 1 get the user's input - comma separated string containing scrambled words
-                
+
             // 2 Extract the words into a string (red,blue,green) 
-
             // 3 Call the DisplayMatchedUnscrambledWords method passing the scrambled words string array
-
         }
-
         private static void DisplayMatchedScrambledWords(string[] scrambledWords)
         {
             //Console.WriteLine("test4");
-            string[] wordList = fileReader.Read("wordlist.txt"); // Put in a constants file. CAPITAL LETTERS.  READONLY. THIS FILE IS READ 
+            string[] wordList = fileReader.Read(Constants.RegWordText); // Put in a constants file. CAPITAL LETTERS.  READONLY. THIS FILE IS READ 
             List<MatchedWord> matchedWords = new List<MatchedWord>();
             matchedWords =wordMatcher.Match(scrambledWords, wordList);
             
             //Console.WriteLine("test5");
 
-            // Rule:  Use a formatter to display ... eg:  {0}{1}
-             
-            if (matchedWords.Count ==0)
+            // Rule:  Use a formatter to display ... eg:  {0}{1}              
+            // Rule:  USe an IF to determine if matchedWords is empty or not......
+            //            if empty - display no words found message.
+            //            if NOT empty - Display the matches.... use "foreach" with the list (matchedWords)
+            if (matchedWords.Count == 0)
             {
-                Console.WriteLine("no words found");
+                Console.WriteLine(Constants.NoMatch);
             }
             
             else
             {
                 //Console.WriteLine("test6");
-                foreach (MatchedWord s in matchedWords)
+                foreach (var Matchedword in matchedWords)
                 {
-                    int x = 0;
-                    String display = String.Format("MATCH FOUND FOR{0}{1}", scrambledWords[x], wordList[x]);
-                    x+= 1;
+                    //from MatchedWord.cs ---->Matchedword.ScrambledWord, Matchedword.Word)
+                  Console.WriteLine(String.Format(Constants.YesMatch, Matchedword.ScrambledWord, Matchedword.Word));
+                    
                 }
                 
             }
-           
-            // Rule:  USe an IF to determine if matchedWords is empty or not......
-            //            if empty - display no words found message.
-            //            if NOT empty - Display the matches.... use "foreach" with the list (matchedWords)
+
 
         }
     }
