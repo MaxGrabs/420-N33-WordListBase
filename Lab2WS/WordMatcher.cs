@@ -21,7 +21,7 @@ namespace Lab2WS
                 {
                     if (scrambledWord.Equals(word, StringComparison.OrdinalIgnoreCase))
                     {
-                        matchedWords.Add(BuildMatchedWord(scrambledWord, word));
+                       matchedWords.Add(BuildMatchedWord(scrambledWord, word));
 
 
                         matchedWords.Add(new MatchedWord() { ScrambledWord = scrambledWord, Word = word });
@@ -53,15 +53,13 @@ namespace Lab2WS
                         // string newScrambleWord= new string(scrambleArray);
                         //string newWord = new string(wordArray);
 
-                        //compare the two sorted strings. If they match, build the MatchWord
+                        //compare the two sorted strings. If they match, build the MatchWord struct and add to matchedWords list.
                         if (newScrambleWord == newWord)
                         {
                             matchedWords.Add(BuildMatchedWord(scrambledWord, word));
 
                             matchedWords.Add(new MatchedWord() { ScrambledWord = scrambledWord, Word = word });
                         }
-                        
-                        //struct? and add to matchedWords list.
 
                     }
 

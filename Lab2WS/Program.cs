@@ -33,9 +33,8 @@ namespace Lab2WS
                 }
 
                 // Optional for now (when you have no loop)  (Take out when finished)
-                Console.WriteLine("Sorry");
-
-        Console.ReadKey();
+               // Console.WriteLine("Sorry");
+                //Console.ReadKey();
 
             }
             catch (Exception e)
@@ -49,9 +48,13 @@ namespace Lab2WS
 
         private static void ExecuteScrambledWordsInFileScenario()
         {
+            
             string fileName = Console.ReadLine();
+            
             string[] scrambledWords = fileReader.Read(fileName);
+            //Console.WriteLine("test");
             DisplayMatchedScrambledWords(scrambledWords);
+            
         }
 
         private static void ExecuteScrambledWordsManualEntryScenario()
@@ -66,24 +69,32 @@ namespace Lab2WS
 
         private static void DisplayMatchedScrambledWords(string[] scrambledWords)
         {
-            string[] wordList = fileReader.Read(@"wordlist.txt"); // Put in a constants file. CAPITAL LETTERS.  READONLY.
-
-            List<MatchedWord> matchedWords = wordMatcher.Match(scrambledWords, wordList);
-
+            //Console.WriteLine("test4");
+            string[] wordList = fileReader.Read("wordlist.txt"); // Put in a constants file. CAPITAL LETTERS.  READONLY. THIS FILE IS READ 
+            List<MatchedWord> matchedWords = new List<MatchedWord>();
+            matchedWords =wordMatcher.Match(scrambledWords, wordList);
+            
+            //Console.WriteLine("test5");
 
             // Rule:  Use a formatter to display ... eg:  {0}{1}
-            if (!matchedWords.Any())
+             
+            if (matchedWords.Count ==0)
             {
-               Console.WriteLine("no words found")
+                Console.WriteLine("no words found");
             }
+            
             else
             {
+                //Console.WriteLine("test6");
                 foreach (MatchedWord s in matchedWords)
                 {
-                    String display = String.Format("MATCH FOUND FOR{0}{1}", scrambledWords, wordList);
+                    int x = 0;
+                    String display = String.Format("MATCH FOUND FOR{0}{1}", scrambledWords[x], wordList[x]);
+                    x+= 1;
                 }
                 
             }
+           
             // Rule:  USe an IF to determine if matchedWords is empty or not......
             //            if empty - display no words found message.
             //            if NOT empty - Display the matches.... use "foreach" with the list (matchedWords)
