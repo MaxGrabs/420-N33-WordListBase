@@ -15,13 +15,14 @@ namespace Lab2WS
         public const string FilePath = "Enter the full path and filename >";
         public const string ManualPath = "Enter word(s) separated by a comma";
         public const string FileManualError = "The entered option was not recognized, please input F or M";
+        public const string FileManualError2 = "The entered option was not recognized, please input Y or N";
         public const string ContinueQuestion = "Would you like to continue? Y/N";
-        public const string Yes = "Yes";
-        public const string No ="No";
+        public const string Yes = "Y";
+        public const string No ="N";
         public const string ErrorMessage = "Sorry an error has occurred.. ";
         public const string RegWordText = "wordlist.txt";
         public const string NoMatch = "No words found";
-        public const string YesMatch = "MATCH FOUND FOR{0}{1}";
+        public const string YesMatch = "MATCH FOUND FOR {0}: {1} ";
 
     }
 }

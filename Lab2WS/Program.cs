@@ -56,7 +56,7 @@ namespace Lab2WS
                                     success2 = true;
                                     break;
                                 default:
-                                    Console.WriteLine(Constants.FileManualError);
+                                    Console.WriteLine(Constants.FileManualError2);
                                     break;
                             }
                         }
@@ -101,14 +101,14 @@ namespace Lab2WS
             string[] wordList = fileReader.Read(Constants.RegWordText); // Put in a constants file. CAPITAL LETTERS.  READONLY. THIS FILE IS READ 
             List<MatchedWord> matchedWords = new List<MatchedWord>();
             matchedWords =wordMatcher.Match(scrambledWords, wordList);
-            
+
             //Console.WriteLine("test5");
 
             // Rule:  Use a formatter to display ... eg:  {0}{1}              
             // Rule:  USe an IF to determine if matchedWords is empty or not......
             //            if empty - display no words found message.
             //            if NOT empty - Display the matches.... use "foreach" with the list (matchedWords)
-            if (matchedWords.Count == 0)
+            if (!matchedWords.Any())
             {
                 Console.WriteLine(Constants.NoMatch);
             }

@@ -7,10 +7,6 @@ namespace Lab2WS
 {
     class WordMatcher
     {
-        public readonly struct s
-        {
-
-        }
         public List<MatchedWord> Match(string[] scrambledWords, string[] wordList)
         {
             List<MatchedWord> matchedWords = new List<MatchedWord>();
@@ -23,8 +19,6 @@ namespace Lab2WS
                     {
                        matchedWords.Add(BuildMatchedWord(scrambledWord, word));
 
-
-                        matchedWords.Add(new MatchedWord() { ScrambledWord = scrambledWord, Word = word });
 
                     }
                     else
@@ -50,28 +44,32 @@ namespace Lab2WS
                         }
                         newScrambleWord.ToString();
                         newWord.ToString();
+                        
+                        
                         // string newScrambleWord= new string(scrambleArray);
                         //string newWord = new string(wordArray);
 
                         //compare the two sorted strings. If they match, build the MatchWord struct and add to matchedWords list.
-                        if (newScrambleWord == newWord)
+                        if (newScrambleWord.Equals(newWord))
                         {
-                            matchedWords.Add(BuildMatchedWord(scrambledWord, word));
+                           
+                           matchedWords.Add(BuildMatchedWord(scrambledWord, word));
 
-                            matchedWords.Add(new MatchedWord() { ScrambledWord = scrambledWord, Word = word });
+
+                            //Console.WriteLine(matchedWords[0]);
                         }
 
                     }
 
                 }
             }
-
-            return null;
+            
+            return matchedWords;
         }
 
-        MatchedWord BuildMatchedWord(string scrambledWord, string word)
+       private MatchedWord BuildMatchedWord(string scrambledWord, string word)
         {
-            MatchedWord matchedWord = new MatchedWord()
+            MatchedWord matchedWord = new MatchedWord
             {
                 ScrambledWord = scrambledWord,
                 Word = word
